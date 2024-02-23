@@ -1,0 +1,124 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28
+  },
+  "configurePresets": [
+    {
+      "name": "x64-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "x64-linux",
+      "hidden": true,
+      "inherits": "x64-base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "x64-linux-intel-dpcpp",
+      "hidden": true,
+      "inherits": "x64-linux",
+      "cacheVariables": {
+        "SYCL_IMPLEMENTATION": "Intel OneAPI",
+        "CMAKE_C_COMPILER": "icx",
+        "CMAKE_CXX_COMPILER": "icpx"
+      }
+    },
+    {
+      "name": "x64-linux-intel-dpcpp-debug",
+      "displayName": "Intel OneAPI Debug (x64 - Linux)",
+      "hidden": false,
+      "inherits": "x64-linux-intel-dpcpp",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-linux-intel-dpcpp-release",
+      "displayName": "Intel OneAPI Release (x64 - Linux)",
+      "hidden": false,
+      "inherits": "x64-linux-intel-dpcpp",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x64-windows",
+      "hidden": true,
+      "inherits": "x64-base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "x64-windows-debug",
+      "hidden": true,
+      "inherits": "x64-windows",
+      "cacheVariables": {
+        "OpenEXR_ROOT": "C:/Sdks/OpenEXR/openexr_DEBUG-3.2.2"
+      }
+    },
+    {
+      "name": "x64-windows-release",
+      "hidden": true,
+      "inherits": "x64-windows",
+      "cacheVariables": {
+        "OpenEXR_ROOT": "C:/Sdks/OpenEXR/openexr-3.2.2"
+      }
+    },
+    {
+      "name": "x64-windows-intel-dpcpp",
+      "hidden": true,
+      "inherits": "x64-windows",
+      "cacheVariables": {
+        "SYCL_IMPLEMENTATION": "Intel OneAPI",
+        "CMAKE_C_COMPILER": "icx",
+        "CMAKE_CXX_COMPILER": "icx"
+      }
+    },
+    {
+      "name": "x64-windows-intel-dpcpp-debug",
+      "displayName": "Intel OneAPI Debug (x64 - Windows)",
+      "hidden": false,
+      "inherits": ["x64-windows-debug", "x64-windows-intel-dpcpp"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-windows-intel-dpcpp-release",
+      "displayName": "Intel OneAPI Release (x64 - Windows)",
+      "hidden": false,
+      "inherits": ["x64-windows-release", "x64-windows-intel-dpcpp"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x64-windows-intel-dpcpp-release-debug-info",
+      "displayName": "Intel OneAPI Release With Debug Info (x64 - Windows)",
+      "hidden": false,
+      "inherits": ["x64-windows-release", "x64-windows-intel-dpcpp"],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ]
+}
