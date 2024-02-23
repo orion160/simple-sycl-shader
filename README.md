@@ -13,7 +13,7 @@ Install a SYCL implementation. (For the moment Only Intel OneAPI is supported)
 Clone the project
 
 ```bash
-git clone xxx && cd xxx
+git clone https://github.com/orion160/simple-sycl-shader && cd simple-sycl-shader
 ```
 
 Build it using CMake
